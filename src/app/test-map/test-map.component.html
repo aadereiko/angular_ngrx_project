@@ -1,0 +1,28 @@
+{{renderCheck()}}
+<agm-map
+  [latitude]="latitude"
+  [longitude]="longitude"
+  [mapTypeId]="mapType"
+  [zoom]="zoom"
+  (mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
+>
+  <agm-marker
+    *ngFor="let marker of markers"
+    [latitude]="marker.lat"
+    [animation]="'DROP'"
+    [longitude]="marker.lng"
+    [opacity]="marker.alpha"
+    [markerDraggable]="true"
+    [title]="'momo'"
+    (markerClick)="selectMarker($event)"
+    (markerRightClick)="removeMarker(marker.lat, marker.lng)"
+  >
+  </agm-marker>
+</agm-map>
+<p
+  *ngFor="let marker of markers"
+  (onClick)="removeMarker(marker.lat, marker.lng)"
+  appHighlight="pink"
+>
+  lat: {{ marker.lat }}, lng: {{ marker.lng }}
+</p>
